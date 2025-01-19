@@ -1,6 +1,7 @@
 ﻿import Header from "@component/Header"
 
 const Layout = ({ children }) => {
+    
     return (
         <>
         <div className="section-wrap">
