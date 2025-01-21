@@ -7,9 +7,12 @@ const Layout = ({ children }) => {
         <div className="section-wrap">
             <Header></Header>
             <div className="main-section">
-                메인 섹션임
                 {children}
             </div>
+            <footer style={{
+                width:'100%',
+                height:100
+            }}></footer>
         </div>
         </>
     )

@@ -27,6 +27,8 @@ const Header = () => {
   useEffect(() => {
     const setHeader = async () => {
       const dailyMovies = await getDailyMovie();
+      console.log(dailyMovies[0]);
+      
       setMovies(dailyMovies)
     }
     setHeader()
