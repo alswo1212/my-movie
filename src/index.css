@@ -9,4 +9,100 @@ body {
 .main-section {
   width: 900px;
   margin: 0 auto;
+  padding-top: 20px;
+}
+
+.center {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(0, -50%);
+}
+
+.MuiSvgIcon-root.star {
+  fill: greenyellow;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.elipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.movie-title {
+  font-size: 20px;
+  color: white;
+  word-break: keep-all;
+  white-space: normal;
+}
+
+.movie-card-info {
+  font-size: 13px;
+  color: white;
+  margin-top: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.flip-box {
+  /* width: 200px; */
+  aspect-ratio: 17/23;
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 1 1 calc(20% - 10px);
+  /* max-width: calc(100% / 5 - 10px); */
+}
+
+.flip-box-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 마우스를 올리면 뒤집힌 상태로 유지 */
+.flip-box:hover .flip-box-inner,
+.flip-box.flipped .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-box-front,
+.flip-box-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  /* 뒷면 숨기기 */
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.flip-box-back {
+  transform: rotateY(180deg);
+  text-align: center;
+}
+
+.card-info-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+}
+
+.card-info-wrap>div>b {
+  color: white;
 }

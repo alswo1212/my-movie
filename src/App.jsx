@@ -1,4 +1,4 @@
-import { StrictMode, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './layout/Layout'
@@ -11,7 +11,7 @@ function App() {
     <>
       <Layout>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/my-movie/' element={<Home />} />
         </Routes>
       </Layout>
     </>
