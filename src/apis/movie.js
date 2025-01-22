@@ -1,5 +1,5 @@
 ﻿import { axiosMovies, axiosPoster } from '@util/axios'
-import { DAILY, WEEKLY, POSTER } from "@const/url"
+import { DAILY, WEEKLY, POSTER } from "@const/apiUrl"
 import { getYesterday, getAWeekAgo } from "@util/day"
 
 const MOVIES_KEY = import.meta.env.VITE_MOVIE_KEY

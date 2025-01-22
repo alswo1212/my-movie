@@ -27,8 +27,6 @@ const Header = () => {
   useEffect(() => {
     const setHeader = async () => {
       const dailyMovies = await getDailyMovie();
-      console.log(dailyMovies[0]);
-      
       setMovies(dailyMovies)
     }
     setHeader()
@@ -37,12 +35,13 @@ const Header = () => {
     <header style={{
       background:'black',
       height:281,
+      minWidth:1000
     }}>
       <div style={{
         display:'flex',
         width:1000,
         margin: '0 auto',
-        height:'100%'
+        height:'100%',
       }}>
         <Carousel 
           cycleNavigation={true}

@@ -1,3 +1,4 @@
-﻿export const DAILY = `/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json`
-export const WEEKLY = `/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json`
-export const POSTER = `/openapi-data2/wisenut/search_api/search_json2.jsp`
+﻿export const HOME = '/my-movie/';
+export const SEARCH = '/my-movie/search/';
+export const LIKE = '/my-movie/like/';
+export const MOVIE = '/my-movie/movie/';

@@ -1,4 +1,5 @@
 ﻿import Header from "@component/Header"
+import Navi from "@component/Navi"
 
 const Layout = ({ children }) => {
     
@@ -7,6 +8,7 @@ const Layout = ({ children }) => {
         <div className="section-wrap">
             <Header></Header>
             <div className="main-section">
+                <Navi />
                 {children}
             </div>
             <footer style={{
