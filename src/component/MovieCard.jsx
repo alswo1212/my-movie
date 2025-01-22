@@ -38,9 +38,6 @@ const MovieCard = ({...movie}) => {
         <div className='movie-card-info'>
           {movie.audi_acc && `누적 관객 ${Number(movie.audi_acc).toLocaleString()}명`}
         </div>
-        {/* <div className='movie-card-info'>
-          {movie.audi_cnt && `${movie.audi_cnt}↑`}
-        </div> */}
       </div>
       <div style={{
         position:'absolute',

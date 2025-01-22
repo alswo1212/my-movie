@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'GmarketSansBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
 }
@@ -23,7 +30,7 @@ body {
 }
 
 .MuiSvgIcon-root.star {
-  fill: greenyellow;
+  fill: yellow;
   width: 1.5em;
   height: 1.5em;
 }
