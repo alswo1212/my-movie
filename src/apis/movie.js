@@ -51,7 +51,7 @@ const getMovies = async (div) => {
       const results = datas[0].Result;
       if (results && results.length) {
         const posterUrl = results[0].posters.split('|')[0]
-        newMovies[i].poster_url = posterUrl ?? ''
+        newMovies[i].poster_url = posterUrl
       }
     }
   });

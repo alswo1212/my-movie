@@ -46,7 +46,7 @@ const Search = ({size = 'S'}) => {
   return (
     <SearchWrapper>
       <div>
-        {location.pathname === SEARCH ??
+        {location.pathname === SEARCH &&
         <>
         <InputLabel id='searchDiv' ></InputLabel>
         <CustomSelect labelId='searchDiv' defaultValue={'movieNm'} size='small'>

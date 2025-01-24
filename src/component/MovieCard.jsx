@@ -1,15 +1,37 @@
 ﻿import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
+const Poster = ({poster_url, movie_nm = '', isback = false}) => {
+  const style = isback ? {
+    filter:'blur(5px) brightness(0.5)',
+    transform:'translate(0, -50%) rotateY(180deg)'
+  } : {}
+  return (
+    <>
+    {
+      poster_url 
+      ? <img className='center'
+          src={poster_url} 
+          alt={movie_nm} 
+          style={style}/>
+      : <div style={{
+          background:'black', 
+          width:'100%', 
+          height:'100%',
+          position: 'absolute',
+        }}></div>
+    }
+    </>
+  )
+}
+
 const MovieCard = ({...movie}) => {
   const myMovies = new Set(localStorage.getItem('myMovies')?.split(',') ?? [])
 
   return <div className="flip-box">
   <div className="flip-box-inner">
     <div className="flip-box-front">
-      <img className='center' 
-        src={movie.poster_url} 
-        alt={movie.movie_nm ?? ''} />
+      <Poster {...movie} />
       <div style={{
         position:'absolute',
         right:6,
@@ -21,13 +43,7 @@ const MovieCard = ({...movie}) => {
       </div>
     </div>
     <div className="flip-box-back">
-      <img className='center' 
-        src={movie.poster_url} 
-        alt={movie.movie_nm ?? ''} 
-        style={{
-          filter:'blur(5px) brightness(0.5)',
-          transform:'translate(0, -50%) rotateY(180deg)'
-        }}/>
+      <Poster {...movie} isback={true}/>
       <div className='card-info-wrap'>
         <div className='movie-title'>
           {movie.movie_nm ?? ''}
