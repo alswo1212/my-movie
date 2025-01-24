@@ -46,8 +46,14 @@ const getMovies = async (div) => {
       return axiosPoster.get(url)
     }));
   response.forEach((rep, i) => {
-    const posterUrl = rep.data.Data[0]?.Result[0].posters.split('|')[0]
-    newMovies[i].poster_url = posterUrl ?? ''
+    const datas = rep.data.Data;
+    if (datas && datas.length) {
+      const results = datas[0].Result;
+      if (results && results.length) {
+        const posterUrl = results[0].posters.split('|')[0]
+        newMovies[i].poster_url = posterUrl ?? ''
+      }
+    }
   });
   return newMovies
 }
