@@ -50,7 +50,9 @@ const SearchMovie = () => {
   }, []);
   
   useEffect(() => {
-    fetchData();
+    if (page) {
+      fetchData();
+    }
   }, [fetchTrigger]);
   
   useEffect(() => {
