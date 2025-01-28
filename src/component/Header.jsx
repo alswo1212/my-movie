@@ -48,8 +48,8 @@ const Header = () => {
           navButtonsAlwaysInvisible={true}
           sx={{width:1000,}}>
           {[
-            movies.filter((_, i) => i < 5),
-            movies.filter((_, i) => i >= 5)
+            movies.filter((_, i) => i >= 5),
+            movies.filter((_, i) => i < 5)
           ].map((subMovies, i) => <Posters key={i} movies={subMovies}/>)}
         </Carousel>
       </div>

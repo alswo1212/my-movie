@@ -1,7 +1,9 @@
-﻿import { useLocation } from 'react-router-dom'
+﻿import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { styled, Select, MenuItem, InputLabel } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import { SEARCH } from '@const/url';
+import { useEffect, useRef, useState } from 'react';
+
 
 const SearchWrapper = styled('div')`
   position: relative;
@@ -39,30 +41,65 @@ const CustomSelect = styled(Select)`
     border:none;
   }
 `
-const iconSize = {S: 1.5, M: 2, L:2.5}
-const Search = ({size = 'S'}) => {
-  const location = useLocation();
+const iconSize = {S: 1.5, M: 2, L:2.5};
+
+const Search = ({
+  size = 'S', 
+  setList, 
+  selectOptions = [], 
+  setOption,
+}) => {
+  const navigate = useNavigate();
+  const input = useRef(null);
+  const [searchParam, setSearchParam] = useSearchParams();
+  const searchText = searchParam.get('searchText');
+  const search = e => {
+    if(!e.nativeEvent.isComposing && e.key === 'Enter'){
+      const inputVal = input?.current.value ?? '';
+      if (searchText !== inputVal) {
+        navigate(`${SEARCH}?searchText=${inputVal}`);
+        return;
+      }
+      if (setList) {
+        setList();
+        
+      }else{
+        navigate(`${SEARCH}?searchText=${inputVal}`);
+      }
+    }
+  };
+  useEffect(() => {
+    // if (setList) {
+    //   setList();
+    // }
+  },[])
   
   return (
-    <SearchWrapper>
-      <div>
-        {location.pathname === SEARCH &&
-        <>
-        <InputLabel id='searchDiv' ></InputLabel>
-        <CustomSelect labelId='searchDiv' defaultValue={'movieNm'} size='small'>
-          <MenuItem value={'movieNm'} >영화</MenuItem>
-          <MenuItem value={'directorNm'} >감독</MenuItem>
-        </CustomSelect>
-        </>
-        }
-      </div>
-      <div>
-        <SearchInput placeholder='검색' size={size}/>
-      </div>
-      <div>
-        <SearchIcon sx={{fontSize:`${iconSize[size]}em`}}/>
-      </div>
-    </SearchWrapper>
+    <div style={{
+      display:'flex',
+      justifyContent:'center'
+    }}>
+      <SearchWrapper>
+        <div>
+          {selectOptions.length 
+          ? <>
+          <InputLabel id='searchDiv' ></InputLabel>
+          <CustomSelect labelId='searchDiv' defaultValue={selectOptions[0].val} size='small' 
+            onChange={e => setOption(e.target.value)}>
+            {selectOptions.map(op => <MenuItem value={op.val} >{op.text}</MenuItem>)}
+          </CustomSelect>
+          </>
+          : null}
+        </div>
+        <div>
+          <SearchInput ref={input} placeholder='검색' size={size}
+            onKeyDown={search}/>
+        </div>
+        <div>
+          <SearchIcon sx={{fontSize:`${iconSize[size]}em`}} onClick={search}/>
+        </div>
+      </SearchWrapper>
+    </div>
   )
 }
 
