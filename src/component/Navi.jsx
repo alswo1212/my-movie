@@ -44,9 +44,7 @@ const Navi = () => {
         </NeviButtonWrapper>
         }
       </div>
-      {location.pathname === SEARCH ||
-      <Search />
-      }
+      {location.pathname.startsWith(SEARCH) || <Search />}
     </NaviWrapper>
   )
 }

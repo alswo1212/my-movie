@@ -1,5 +1,7 @@
 ﻿import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useNavigate } from 'react-router-dom';
+import { MOVIE } from '@const/url';
 
 const Poster = ({poster_url, movie_nm = '', isback = false}) => {
   const style = isback ? {
@@ -26,8 +28,13 @@ const Poster = ({poster_url, movie_nm = '', isback = false}) => {
 }
 
 const MovieCard = ({...movie}) => {
+  const navigate = useNavigate();
   const myMovies = new Set(localStorage.getItem('myMovies')?.split(',') ?? [])
-
+  const goDetail = () => {
+    if(!movie.movie_id)
+      return;
+    navigate(`${MOVIE}/${movie.movie_id}/${movie.movie_seq}`)
+  }
   return <div className="flip-box">
   <div className="flip-box-inner">
     <div className="flip-box-front">
@@ -45,15 +52,15 @@ const MovieCard = ({...movie}) => {
     <div className="flip-box-back">
       <Poster {...movie} isback={true}/>
       <div className='card-info-wrap'>
-        <div className='movie-title'>
+        <div className='movie-title' onClick={goDetail}>
           {movie.movie_nm ?? ''}
         </div>
-        <div className='movie-card-info'>
-          {movie.open_dt && `${movie.open_dt} 개봉`}
-        </div>
-        <div className='movie-card-info'>
-          {movie.audi_acc && `누적 관객 ${Number(movie.audi_acc).toLocaleString()}명`}
-        </div>
+        {movie.director && <div className='movie-card-info'>{movie.director}</div>}
+        {movie.open_dt && <div className='movie-card-info'>{`${movie.open_dt} 개봉`}</div>}
+        {movie.audi_acc && <div className='movie-card-info'>{`누적 관객 ${Number(movie.audi_acc).toLocaleString()}명`}</div>}
+        {movie.genre && <div className='movie-card-info'>{movie.genre}</div>}
+        {movie.nation && <div className='movie-card-info'>{movie.nation}</div>}
+        
       </div>
       <div style={{
         position:'absolute',

@@ -17,6 +17,7 @@ body {
   width: 900px;
   margin: 0 auto;
   padding-top: 20px;
+  position: relative;
 }
 
 .center {
@@ -44,7 +45,7 @@ body {
 .movie-title {
   font-size: 20px;
   color: white;
-  word-break: keep-all;
+  word-break: break-word;
   white-space: normal;
 }
 
@@ -63,12 +64,10 @@ body {
 }
 
 .flip-box {
-  /* width: 200px; */
   aspect-ratio: 17/23;
   border-radius: 10px;
   overflow: hidden;
-  flex: 1 1 calc(20% - 10px);
-  /* max-width: calc(100% / 5 - 10px); */
+  flex-basis: 19%;
 }
 
 .flip-box-inner {

@@ -14,8 +14,8 @@ function App() {
         <Routes>
           <Route path={HOME} element={<Home />} />
           <Route path={LIKE} element={<LikehMovie />} />
-          <Route path={SEARCH} element={<SearchMovie />} />
-          <Route path={`${MOVIE}/:movieCd`} element={<MovieDetail />} />
+          <Route path={`${SEARCH}`} element={<SearchMovie />} />
+          <Route path={`${MOVIE}/:movieId/:movieSeq`} element={<MovieDetail />} />
         </Routes>
       </Layout>
     </>
