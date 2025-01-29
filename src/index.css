@@ -1,4 +1,11 @@
 @font-face {
+  font-family: 'RIDIBatang';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'GmarketSansBold';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
   font-weight: normal;
@@ -47,6 +54,7 @@ body {
   color: white;
   word-break: break-word;
   white-space: normal;
+  cursor: pointer;
 }
 
 .movie-card-info {

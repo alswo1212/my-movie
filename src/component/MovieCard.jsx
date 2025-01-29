@@ -2,6 +2,7 @@
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { useNavigate } from 'react-router-dom';
 import { MOVIE } from '@const/url';
+import MyStar from './MyStar';
 
 const Poster = ({poster_url, movie_nm = '', isback = false}) => {
   const style = isback ? {
@@ -29,7 +30,6 @@ const Poster = ({poster_url, movie_nm = '', isback = false}) => {
 
 const MovieCard = ({...movie}) => {
   const navigate = useNavigate();
-  const myMovies = new Set(localStorage.getItem('myMovies')?.split(',') ?? [])
   const goDetail = () => {
     if(!movie.movie_id)
       return;
@@ -44,9 +44,7 @@ const MovieCard = ({...movie}) => {
         right:6,
         top:6,
       }}>
-        {myMovies.has(movie.movie_cd)
-        ? <StarIcon className='star' />
-        : <StarBorderIcon className='star' />}
+        <MyStar movie_cd={movie.movie_cd}/>
       </div>
     </div>
     <div className="flip-box-back">
@@ -67,9 +65,7 @@ const MovieCard = ({...movie}) => {
         right:6,
         top:6,
       }}>
-        {myMovies.has(movie.movie_cd)
-        ? <StarIcon className='star' />
-        : <StarBorderIcon className='star' />}
+        <MyStar movie_cd={movie.movie_cd}/>
       </div>
     </div>
   </div>
