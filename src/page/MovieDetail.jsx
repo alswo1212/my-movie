@@ -55,7 +55,7 @@ const MovieDetail = () => {
           textAlign:'center'
         }}>
           <div>
-            <img src={movie.poster_url} alt={movie.movie_nm} style={{
+            <img src={movie.poster_url} alt={movie.poster_url ? movie.movie_nm : '포스터 정보가 없습니다.'} style={{
               width:'100%',
               borderRadius:20,
               boxShadow: '0 0 10px 0 #666',
