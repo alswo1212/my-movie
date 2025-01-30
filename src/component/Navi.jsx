@@ -1,14 +1,19 @@
 ﻿import { useLocation, useNavigate } from 'react-router-dom'
-import { styled, Toolbar } from '@mui/material'
+import { Toolbar } from '@mui/material'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import Search from '@component/Search';
 import { HOME, LIKE, SEARCH } from '@const/url';
+import LoginModal from '@component/LoginModal';
+import styled from 'styled-components';
 
-const NaviWrapper = styled(Toolbar)(() => ({
+const NaviWrapper = styled(Toolbar)(({theme}) => ({
   display: 'flex',
   justifyContent: 'space-between',
-  padding:'0 !important'
+  padding:'0 !important',
+  "& > div": {
+    flexBasis: '33%'
+  }
 }));
 
 const NeviButtonWrapper = styled('div')`
@@ -45,6 +50,7 @@ const Navi = () => {
         }
       </div>
       {location.pathname.startsWith(SEARCH) || <Search />}
+      <LoginModal></LoginModal>
     </NaviWrapper>
   )
 }

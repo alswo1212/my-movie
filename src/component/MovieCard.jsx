@@ -1,8 +1,6 @@
-﻿import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { useNavigate } from 'react-router-dom';
+﻿import { useNavigate } from 'react-router-dom';
 import { MOVIE } from '@const/url';
-import MyStar from './MyStar';
+import MyStar from '@component/MyStar';
 
 const Poster = ({poster_url, movie_nm = '', isback = false}) => {
   const style = isback ? {
@@ -44,7 +42,7 @@ const MovieCard = ({...movie}) => {
         right:6,
         top:6,
       }}>
-        <MyStar movie_cd={movie.movie_cd}/>
+        <MyStar movie_cd={movie.movie_cd} movie_id={movie.movie_id} movie_seq={movie.movie_seq}/>
       </div>
     </div>
     <div className="flip-box-back">
@@ -65,7 +63,7 @@ const MovieCard = ({...movie}) => {
         right:6,
         top:6,
       }}>
-        <MyStar movie_cd={movie.movie_cd}/>
+        <MyStar movie_cd={movie.movie_cd} movie_id={movie.movie_id} movie_seq={movie.movie_seq}/>
       </div>
     </div>
   </div>
