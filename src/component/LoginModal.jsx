@@ -36,15 +36,33 @@ const LoginModal = () => {
     setModalOpen(false);
   }
 
+  const logout = () => {
+    setUser(null);
+    setLikes([])
+  }
+
   return (
     <div>
       {/* 로그인 버튼 */}
       {user 
-      ? <div style={{textAlign:'right'}}>
+      ? <div style={{
+        display:'flex',
+        justifyContent:'flex-end',
+        alignItems:'center',
+        gap:10,
+      }}>
+        <div>
           <div>{user.email}</div>
           <div>님 안녕하세요.</div>
+        </div>
+        <div>
+        </div>
+          <Button variant="contained" color="error" onClick={logout}>
+            로그아웃
+          </Button>
         </div> 
-      : <Button variant="contained" color="primary" onClick={handleOpen}>
+      : <Button variant="contained" color="primary" onClick={handleOpen}
+          style={{float:'right'}}>
         로그인
       </Button>
       }
