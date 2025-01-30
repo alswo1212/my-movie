@@ -38,7 +38,7 @@ const LoginModal = () => {
 
   const logout = () => {
     setUser(null);
-    setLikes([])
+    setLikes([]);
   }
 
   return (
