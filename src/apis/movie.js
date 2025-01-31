@@ -73,7 +73,7 @@ export const getSearchMovies = async (searchText, param = 'title', page = 0) => 
   return result;
 }
 
-export const getMovieByIdAndSeq = async (movieId, movieSeq) => {
+export const getMovieByIdAndSeq = async (movieId, movieSeq, movieCd) => {
   const url = `${SEARCHMOVIELIST}?collection=kmdb_new2&detail=Y&ServiceKey=${POSTER_KEY}&use=극장용&movieId=${movieId}&movieSeq=${movieSeq}`;
   const { data: { Data } } = await axiosPoster.get(url);
   const Result = Data[0].Result;
@@ -87,7 +87,9 @@ export const getMovieByIdAndSeq = async (movieId, movieSeq) => {
 
   return {
     nation, genre, runtime,
-    movie_cd: CommCodes.CommCode[0].CodeNo,
+    movie_id: movieId,
+    movie_seq: movieSeq,
+    movie_cd: CommCodes.CommCode[0].CodeNo || movieCd,
     movie_nm: titleEtc.split('^')[0],
     poster_url: posters.split('|')[0],
     directors: directors.director,

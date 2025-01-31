@@ -6,6 +6,8 @@ import Search from '@component/Search';
 import { HOME, LIKE, SEARCH } from '@const/url';
 import LoginModal from '@component/LoginModal';
 import styled from 'styled-components';
+import { useAtom } from 'jotai';
+import { loginModalOpenAtom } from '../util/atoms';
 
 const NaviWrapper = styled(Toolbar)(({theme}) => ({
   display: 'flex',
@@ -34,6 +36,8 @@ const NeviButtonWrapper = styled('div')`
 const Navi = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const email = sessionStorage.getItem('email');
+  const [loginModalOpen, setLoginModalOpen] = useAtom(loginModalOpenAtom);
   
   return (
     <NaviWrapper>
@@ -44,7 +48,13 @@ const Navi = () => {
         </NeviButtonWrapper>
         }
         {location.pathname === LIKE ||
-        <NeviButtonWrapper color='yellow' onClick={e => navigate(LIKE)}>
+        <NeviButtonWrapper color='yellow' onClick={e => {
+          if(!email){
+            setLoginModalOpen(true);
+            return;
+          }
+          navigate(LIKE);
+        }}>
           <StarRateRoundedIcon fontSize='large'/>
         </NeviButtonWrapper>
         }

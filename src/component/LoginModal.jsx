@@ -1,24 +1,26 @@
 ﻿import { Modal, Box, TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
 import { useAtom } from "jotai";
-import { userAtom, loginModalOpenAtom, likesAtom } from "@util/atoms";
+import { loginModalOpenAtom, likesAtom } from "@util/atoms";
 import { useState } from "react";
 import { login } from "@apis/user";
+import { HOME, LIKE } from '@const/url';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginModal = () => {
   const [modalOpen, setModalOpen] = useAtom(loginModalOpenAtom);
-  const [user, setUser] = useAtom(userAtom)
   const [likes, setLikes] = useAtom(likesAtom)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const userEmail = sessionStorage.getItem('email');
 
   const handleClose = () => setModalOpen(false);
   const handleOpen = () => setModalOpen(true);
   const snackbarClose = () => setSnackbarOpen(false);
   const clickLoginButton =  async () => {
-    console.log(email, password);
-    
     if(!email.trim() || !password){
       setSnackbarOpen(true);
       setSnackbarMessage("이메일과 비밀번호를 입력해주세요.");
@@ -31,20 +33,25 @@ const LoginModal = () => {
       return;
     }
     
-    setUser({email});
+    sessionStorage.setItem('email', email);
     setLikes(data.likes);
+    sessionStorage.setItem('likes', JSON.stringify(data.likes));
     setModalOpen(false);
   }
 
   const logout = () => {
-    setUser(null);
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('likes');
     setLikes([]);
+    if(location.pathname === LIKE){
+      navigate(HOME);
+    }
   }
 
   return (
     <div>
       {/* 로그인 버튼 */}
-      {user 
+      {userEmail 
       ? <div style={{
         display:'flex',
         justifyContent:'flex-end',
@@ -52,7 +59,7 @@ const LoginModal = () => {
         gap:10,
       }}>
         <div>
-          <div>{user.email}</div>
+          <div>{userEmail}</div>
           <div>님 안녕하세요.</div>
         </div>
         <div>
@@ -67,7 +74,6 @@ const LoginModal = () => {
       </Button>
       }
 
-      {/* 로그인 모달 */}
       <Modal open={modalOpen} onClose={handleClose}>
         <Box
           sx={{
