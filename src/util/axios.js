@@ -11,5 +11,5 @@ export const axiosPoster = axios.create({
 });
 
 export const axiosApi = axios.create({
-  baseURL: `http://${import.meta.env.VITE_API_BASE}`,
+  baseURL: `${import.meta.env.VITE_API_BASE}`,
 });

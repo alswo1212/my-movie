@@ -1,8 +1,9 @@
 ﻿import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import { getMovieByIdAndSeq } from "@apis/movie";
 import { Typography } from "@mui/material";
 import styled from "styled-components";
+import MyStar from "../component/MyStar";
 
 const MovieInfo = styled.div`
   ${props => props.infoname && `
@@ -34,11 +35,13 @@ const MovieInfo = styled.div`
 
 const MovieDetail = () => {
   const {movieId, movieSeq} = useParams();
+  const [queryString, setQueryString] = useSearchParams();
   const [movie, setMovie] = useState(null);
+  const movieCd = queryString.get('code');
 
   useEffect(() => {
     const setData = async () => {
-      const data = await getMovieByIdAndSeq(movieId, movieSeq);
+      const data = await getMovieByIdAndSeq(movieId, movieSeq, movieCd);
       if(data)
         setMovie(data);
     }
@@ -54,12 +57,23 @@ const MovieDetail = () => {
           flexBasis:'50%',
           textAlign:'center'
         }}>
-          <div>
+          <div style={{position:'relative'}}>
             <img src={movie.poster_url} alt={movie.poster_url ? movie.movie_nm : '포스터 정보가 없습니다.'} style={{
               width:'100%',
               borderRadius:20,
               boxShadow: '0 0 10px 0 #666',
             }}/>
+            <div style={{
+              position:'absolute',
+              top:10,
+              right:10
+            }}>
+
+              <MyStar movie_cd={movie?.movie_cd} 
+                movie_id={movieId} 
+                movie_seq={movieSeq}
+                size={2.2}/>
+            </div>
           </div>
         </div>
         <div style={{
