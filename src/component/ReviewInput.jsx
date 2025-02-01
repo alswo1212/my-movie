@@ -23,7 +23,7 @@ const ReviewInput = ({setReviews, movie_cd}) => {
   return (
     <>
     {
-      (isLogin && Boolean(email)) &&
+      isLogin && email &&
       <Card sx={{position:'sticky', bottom:10}}>
         <CardContent sx={{
           display:'flex',

@@ -7,7 +7,7 @@ import { HOME, LIKE, SEARCH } from '@const/url';
 import LoginModal from '@component/LoginModal';
 import styled from 'styled-components';
 import { useAtom } from 'jotai';
-import { isLoginAtom, loginModalOpenAtom } from '../util/atoms';
+import { isLoginAtom, loginModalOpenAtom } from '@util/atoms';
 
 const NaviWrapper = styled(Toolbar)(({theme}) => ({
   display: 'flex',

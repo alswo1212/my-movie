@@ -42,7 +42,7 @@ const Review = ({_id, content, writer, setReviews, movie_cd}) => {
   return (
     <StyledCard>
       <CardContent>
-        {writer === email && 
+        {isLogin && writer === email && 
         <ClearIcon fontSize="medium" sx={{
           position: 'absolute',
           top: '10px',
