@@ -56,9 +56,6 @@ const MovieCard = ({...movie}) => {
         {movie.audi_acc && <div className='movie-card-info'>{`누적 관객 ${Number(movie.audi_acc).toLocaleString()}명`}</div>}
         {movie.genre && <div className='movie-card-info'>{movie.genre}</div>}
         {movie.nation && <div className='movie-card-info'>{movie.nation}</div>}
-        {movie.movie_cd && <div className='movie-card-info'>{movie.movie_cd}</div>}
-        {movie.movie_id && <div className='movie-card-info'>{movie.movie_id}</div>}
-        {movie.movie_seq && <div className='movie-card-info'>{movie.movie_seq}</div>}
         
       </div>
       <div style={{

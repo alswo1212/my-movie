@@ -1,14 +1,16 @@
-﻿import { Modal, Box, TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
+﻿import { Modal, Box, TextField, Button, Typography } from "@mui/material";
 import { useAtom } from "jotai";
-import { loginModalOpenAtom, likesAtom } from "@util/atoms";
+import { loginModalOpenAtom, likesAtom, isLoginAtom } from "@util/atoms";
 import { useState } from "react";
 import { login } from "@apis/user";
 import { HOME, LIKE } from '@const/url';
 import { useLocation, useNavigate } from "react-router-dom";
+import SnackAlert from "@component/SnackAlert";
 
 const LoginModal = () => {
   const [modalOpen, setModalOpen] = useAtom(loginModalOpenAtom);
-  const [likes, setLikes] = useAtom(likesAtom)
+  const [likes, setLikes] = useAtom(likesAtom);
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -36,6 +38,7 @@ const LoginModal = () => {
     sessionStorage.setItem('email', email);
     setLikes(data.likes);
     sessionStorage.setItem('likes', JSON.stringify(data.likes));
+    setIsLogin(true);
     setModalOpen(false);
   }
 
@@ -43,6 +46,7 @@ const LoginModal = () => {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('likes');
     setLikes([]);
+    setIsLogin(false)
     if(location.pathname === LIKE){
       navigate(HOME);
     }
@@ -120,16 +124,7 @@ const LoginModal = () => {
           </Box>
         </Box>
       </Modal>
-      <Snackbar 
-        open={snackbarOpen}
-        autoHideDuration={2000}
-        onClose={snackbarClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert severity="warning" onClose={snackbarClose}>
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+      <SnackAlert message={snackbarMessage} open={snackbarOpen} close={snackbarClose}/>
     </div>
   );
 };

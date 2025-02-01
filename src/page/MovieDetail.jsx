@@ -3,7 +3,9 @@ import { useParams, useSearchParams } from "react-router-dom"
 import { getMovieByIdAndSeq } from "@apis/movie";
 import { Typography } from "@mui/material";
 import styled from "styled-components";
-import MyStar from "../component/MyStar";
+import MyStar from "@component/MyStar";
+import Review from "@component/Review";
+import ReviewInput from "@component/ReviewInput";
 
 const MovieInfo = styled.div`
   ${props => props.infoname && `
@@ -37,6 +39,21 @@ const MovieDetail = () => {
   const {movieId, movieSeq} = useParams();
   const [queryString, setQueryString] = useSearchParams();
   const [movie, setMovie] = useState(null);
+  const [reviews, setReviews] = useState([
+    {
+      writer: 'minjagot@naver.com',
+      content: 'aslkdjwifaslvkj'
+    },
+    {
+      writer: 'minjagot',
+      content: 'aslkdjwspo2q3ru25'
+    },
+    {
+      writer: 'minjagot@naver.com',
+      content: 'aslkdjwifaslvkj'
+    },
+  ]);
+
   const movieCd = queryString.get('code');
 
   useEffect(() => {
@@ -97,8 +114,16 @@ const MovieDetail = () => {
           </MovieInfo>
         </div>
       </div>
-      <div>
-        리뷰자리
+      <div style={{position:'relative'}}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap:15,
+          marginBottom:15,
+        }}>
+          {reviews.map(rv =><Review {...rv} setReviews={setReviews}/>)}
+        </div>
+        <ReviewInput />
       </div>
       </>
       }
