@@ -3,7 +3,10 @@ import { useParams, useSearchParams } from "react-router-dom"
 import { getMovieByIdAndSeq } from "@apis/movie";
 import { Typography } from "@mui/material";
 import styled from "styled-components";
-import MyStar from "../component/MyStar";
+import MyStar from "@component/MyStar";
+import Review from "@component/Review";
+import ReviewInput from "@component/ReviewInput";
+import { getReviews } from "@apis/review";
 
 const MovieInfo = styled.div`
   ${props => props.infoname && `
@@ -37,15 +40,21 @@ const MovieDetail = () => {
   const {movieId, movieSeq} = useParams();
   const [queryString, setQueryString] = useSearchParams();
   const [movie, setMovie] = useState(null);
+  const [reviews, setReviews] = useState([]);
+
   const movieCd = queryString.get('code');
 
   useEffect(() => {
     const setData = async () => {
-      const data = await getMovieByIdAndSeq(movieId, movieSeq, movieCd);
-      if(data)
-        setMovie(data);
+      const moviePromise = getMovieByIdAndSeq(movieId, movieSeq, movieCd);
+      const reviewPromise = getReviews(movieCd);
+      const gotMovie = await moviePromise;
+      const reviewList = await reviewPromise;
+      
+      setMovie(gotMovie);
+      setReviews(reviewList);
     }
-    setData()
+    setData();
   }, [])
   return (
     <div>
@@ -97,8 +106,16 @@ const MovieDetail = () => {
           </MovieInfo>
         </div>
       </div>
-      <div>
-        리뷰자리
+      <div style={{position:'relative'}}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap:15,
+          marginBottom:15,
+        }}>
+          {reviews.map(rv =><Review {...rv} setReviews={setReviews}/>)}
+        </div>
+        <ReviewInput setReviews={setReviews} movie_cd={movie.movie_cd} />
       </div>
       </>
       }
