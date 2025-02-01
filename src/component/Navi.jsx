@@ -7,7 +7,7 @@ import { HOME, LIKE, SEARCH } from '@const/url';
 import LoginModal from '@component/LoginModal';
 import styled from 'styled-components';
 import { useAtom } from 'jotai';
-import { loginModalOpenAtom } from '../util/atoms';
+import { isLoginAtom, loginModalOpenAtom } from '../util/atoms';
 
 const NaviWrapper = styled(Toolbar)(({theme}) => ({
   display: 'flex',
@@ -36,7 +36,7 @@ const NeviButtonWrapper = styled('div')`
 const Navi = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const email = sessionStorage.getItem('email');
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom);
   const [loginModalOpen, setLoginModalOpen] = useAtom(loginModalOpenAtom);
   
   return (
@@ -49,7 +49,7 @@ const Navi = () => {
         }
         {location.pathname === LIKE ||
         <NeviButtonWrapper color='yellow' onClick={e => {
-          if(!email){
+          if(!isLogin){
             setLoginModalOpen(true);
             return;
           }
