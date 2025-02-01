@@ -1,12 +1,13 @@
 ﻿import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { likesAtom, loginModalOpenAtom } from '@util/atoms';
+import { likesAtom, loginModalOpenAtom, isLoginAtom } from '@util/atoms';
 import { useAtom } from 'jotai';
 import { unLike, like } from '@apis/like';
 
 const MyStar = ({movie_cd, movie_id, movie_seq, size = 1.5}) => {
   const [likeList, setLikeList] = useAtom(likesAtom);
   const [modalOpen, setMdalOpen] = useAtom(loginModalOpenAtom);
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom);
   const myMovies = new Set(likeList.map(data => data.movie_cd));
   const email = sessionStorage.getItem('email');
 
@@ -28,7 +29,7 @@ const MyStar = ({movie_cd, movie_id, movie_seq, size = 1.5}) => {
         height:`${size}em`
       }}
         onClick={e => {
-          if (!email) {
+          if (!(isLogin && email)) {
             setMdalOpen(true);
             return;
           }
@@ -39,7 +40,7 @@ const MyStar = ({movie_cd, movie_id, movie_seq, size = 1.5}) => {
         height:`${size}em`
       }}
         onClick={e => {
-          if (!email) {
+          if (!(isLogin && email)) {
             setMdalOpen(true);
             return;
           }

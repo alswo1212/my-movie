@@ -1,6 +1,6 @@
 ﻿import { useAtom } from "jotai"
 import { useEffect, useState } from "react";
-import { likesAtom } from "@util/atoms"
+import { likesAtom, isLoginAtom } from "@util/atoms"
 import { getMovieByIdAndSeq } from "@apis/movie";
 import { Typography } from "@mui/material";
 import MovieCard from "@component/MovieCard"
@@ -8,6 +8,7 @@ import MovieCard from "@component/MovieCard"
 const LikeMovie = () => {
   const [likes, setLikes] = useAtom(likesAtom);
   const [likeMovieObj, setLikeMovieObj] = useState({});
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom);
   
   useEffect(() => {
     const promisses = likes.map(({movie_id, movie_seq, movie_cd}) => getMovieByIdAndSeq(movie_id, movie_seq, movie_cd))
@@ -24,7 +25,7 @@ const LikeMovie = () => {
 
       setLikeMovieObj(genreThenMovies);
     })
-  }, []);
+  }, [isLogin]);
   return (
     <div>
       <br />

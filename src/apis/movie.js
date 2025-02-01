@@ -1,7 +1,7 @@
 ﻿import { axiosMovies, axiosPoster } from '@util/axios'
 import { DAILY, WEEKLY, POSTER } from "@const/apiUrl"
 import { getYesterday, getAWeekAgo } from "@util/day"
-import { SEARCHMOVIELIST } from '../const/apiUrl'
+import { SEARCHMOVIELIST } from '@const/apiUrl'
 
 const MOVIES_KEY = import.meta.env.VITE_MOVIE_KEY
 const POSTER_KEY = import.meta.env.VITE_POSTER_KEY

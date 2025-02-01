@@ -1,7 +1,7 @@
 ﻿import { useEffect, useState } from "react"
 import styled from "styled-components"
 import Carousel from "react-material-ui-carousel"
-import { getDailyMovie } from "../apis/movie"
+import { getDailyMovie } from "@apis/movie"
 
 const Posters = ({movies}) => {
   return (<div style={{

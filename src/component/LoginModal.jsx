@@ -55,7 +55,7 @@ const LoginModal = () => {
   return (
     <div>
       {/* 로그인 버튼 */}
-      {userEmail 
+      {(isLogin && userEmail) 
       ? <div style={{
         display:'flex',
         justifyContent:'flex-end',
