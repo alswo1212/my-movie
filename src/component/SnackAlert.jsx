@@ -1,8 +1,6 @@
 ﻿import { Alert, Snackbar } from "@mui/material";
 
 const SnackAlert = ({open, close, message, autoHideDuration = 2000}) => {
-  console.log('autoHideDuration', autoHideDuration);
-  
   return <Snackbar 
     open={open}
     autoHideDuration={autoHideDuration}

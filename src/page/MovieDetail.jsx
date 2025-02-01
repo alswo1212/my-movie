@@ -6,6 +6,7 @@ import styled from "styled-components";
 import MyStar from "@component/MyStar";
 import Review from "@component/Review";
 import ReviewInput from "@component/ReviewInput";
+import { getReviews } from "@apis/review";
 
 const MovieInfo = styled.div`
   ${props => props.infoname && `
@@ -39,30 +40,21 @@ const MovieDetail = () => {
   const {movieId, movieSeq} = useParams();
   const [queryString, setQueryString] = useSearchParams();
   const [movie, setMovie] = useState(null);
-  const [reviews, setReviews] = useState([
-    {
-      writer: 'minjagot@naver.com',
-      content: 'aslkdjwifaslvkj'
-    },
-    {
-      writer: 'minjagot',
-      content: 'aslkdjwspo2q3ru25'
-    },
-    {
-      writer: 'minjagot@naver.com',
-      content: 'aslkdjwifaslvkj'
-    },
-  ]);
+  const [reviews, setReviews] = useState([]);
 
   const movieCd = queryString.get('code');
 
   useEffect(() => {
     const setData = async () => {
-      const data = await getMovieByIdAndSeq(movieId, movieSeq, movieCd);
-      if(data)
-        setMovie(data);
+      const moviePromise = getMovieByIdAndSeq(movieId, movieSeq, movieCd);
+      const reviewPromise = getReviews(movieCd);
+      const gotMovie = await moviePromise;
+      const reviewList = await reviewPromise;
+      
+      setMovie(gotMovie);
+      setReviews(reviewList);
     }
-    setData()
+    setData();
   }, [])
   return (
     <div>
@@ -123,7 +115,7 @@ const MovieDetail = () => {
         }}>
           {reviews.map(rv =><Review {...rv} setReviews={setReviews}/>)}
         </div>
-        <ReviewInput />
+        <ReviewInput setReviews={setReviews} movie_cd={movie.movie_cd} />
       </div>
       </>
       }

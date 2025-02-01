@@ -1,11 +1,11 @@
-﻿import { Alert, Button, Card, CardContent, Snackbar, TextField } from "@mui/material";
+﻿import { Button, Card, CardContent, TextField } from "@mui/material";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { isLoginAtom } from "@util/atoms";
 import { postReview } from "@apis/review";
 import SnackAlert from "@component/SnackAlert";
 
-const ReviewInput = ({setReviews}) => {
+const ReviewInput = ({setReviews, movie_cd}) => {
   const [content, setContent] = useState('');
   const [isLogin, setIsLogin] = useAtom(isLoginAtom);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -16,7 +16,7 @@ const ReviewInput = ({setReviews}) => {
       setSnackbarOpen(true);
       return;
     }
-    setReviews(await postReview({content, writer:email}));
+    setReviews(await postReview({content, movie_cd, writer:email}));
     setContent('');
   }
 

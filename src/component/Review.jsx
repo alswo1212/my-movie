@@ -17,19 +17,20 @@ const StyledCard = styled(Card)({
   }
 });
 
-const Review = ({id, content, writer, setReviews}) => {
+const Review = ({_id, content, writer, setReviews, movie_cd}) => {
   const [updatedContent, setUpdatedContent] = useState(content);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLogin, setIsLogin] = useAtom(isLoginAtom);
   const email = sessionStorage.getItem('email');
 
   const updateReview = async (e) => {
-    const reviews = await putReview({id, content:updatedContent});
+    const reviews = await putReview({_id, movie_cd, content:updatedContent});
     setReviews(reviews);
+    setIsUpdating(false);
   };
 
   const removeReview = async (e) => {
-    const reviews = await deleteReview(id);
+    const reviews = await deleteReview({_id, movie_cd});
     setReviews(reviews);
   }
 
