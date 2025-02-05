@@ -1,6 +1,8 @@
 ﻿import { useNavigate } from 'react-router-dom';
 import { MOVIE } from '@const/url';
 import MyStar from '@component/MyStar';
+import { useState } from 'react';
+import SnackAlert from "@component/SnackAlert";
 
 const Poster = ({poster_url, movie_nm = '', isback = false}) => {
   const style = isback ? {
@@ -28,12 +30,16 @@ const Poster = ({poster_url, movie_nm = '', isback = false}) => {
 
 const MovieCard = ({...movie}) => {
   const navigate = useNavigate();
+  const [snackOpen, setSnackOpen] = useState(false);
   const goDetail = () => {
-    if(!movie.movie_id)
+    if(!movie.movie_id){
+      setSnackOpen(true);
       return;
+    }
     navigate(`${MOVIE}/${movie.movie_id}/${movie.movie_seq}?code=${movie.movie_cd}`);
   }
   return <div className="flip-box">
+  <SnackAlert open={snackOpen} close={e => setSnackOpen(false)} message="영화 상세정보가 없습니다." />
   <div className="flip-box-inner">
     <div className="flip-box-front">
       <Poster {...movie} />

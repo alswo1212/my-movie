@@ -96,7 +96,7 @@ const LoginModal = () => {
           }}
         >
           <Typography variant="h6" component="h2" textAlign="center">
-            로그인
+            로그인 겸 회원가입
           </Typography>
           <TextField
             label="이메일"

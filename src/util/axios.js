@@ -6,7 +6,7 @@ export const axiosMovies = axios.create({
 });
 
 export const axiosPoster = axios.create({
-  baseURL: 'http://api.koreafilm.or.kr',
+  baseURL: 'https://api.koreafilm.or.kr',
   // timeout: 1000,
 });
 

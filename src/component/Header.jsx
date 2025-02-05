@@ -27,7 +27,9 @@ const Header = () => {
   useEffect(() => {
     const setHeader = async () => {
       const dailyMovies = await getDailyMovie();
-      setMovies(dailyMovies)
+      const newMovies = [[], []];
+      dailyMovies.forEach((movie, i) => newMovies[parseInt(i/5)].push(movie));
+      setMovies(newMovies);
     }
     setHeader()
   }, [])
@@ -47,10 +49,11 @@ const Header = () => {
           cycleNavigation={true}
           navButtonsAlwaysInvisible={true}
           sx={{width:1000,}}>
-          {[
+          {movies.map((subMovies, i) => <Posters key={i} movies={subMovies}/>)}
+          {/* {[
             movies.filter((_, i) => i >= 5),
             movies.filter((_, i) => i < 5)
-          ].map((subMovies, i) => <Posters key={i} movies={subMovies}/>)}
+          ].map((subMovies, i) => <Posters key={i} movies={subMovies}/>)} */}
         </Carousel>
       </div>
     </header>
